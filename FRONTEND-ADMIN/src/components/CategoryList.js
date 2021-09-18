@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import NavigationBar from "./Navbar"
-import {Container, Row, Col, Table, Navbar, Nav, Button} from 'react-bootstrap'
+import {Container, Row, Col, Table, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
 function CategoryList(){

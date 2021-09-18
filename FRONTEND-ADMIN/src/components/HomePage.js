@@ -8,7 +8,7 @@ function HomePage(){
         <Container>
             <Row>
                 <Col>
-                
+                        <h1>Home</h1>
                 </Col>
             </Row>
         </Container>

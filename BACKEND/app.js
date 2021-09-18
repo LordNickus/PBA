@@ -10,6 +10,7 @@ mongoose.connect( 'mongodb://localhost:27017/PBA', {
 })
 
 const Category = require('./schemas/category')
+const Transaction = require('./schemas/transaction')
 
 app.use(cors())
 app.use(express.json())
@@ -52,7 +53,7 @@ app.patch('/categories/:id', function(req, res) {
 
 
 /**Transactions */
-app.get('/transaction', function (req, res){
+app.get('/transactions', function (req, res){
     Transaction
     .find()
     .then(data => {
@@ -63,18 +64,17 @@ app.get('/transaction', function (req, res){
 
 })
 
-app.patch('/transaction/:id', function(req, res) {
+app.patch('/transactions/:id', function(req, res) {
     res.status(201).end()
 })
 
-app.post('/transaction', function (req, res) {
+app.post('/transactions', function (req, res) {
     let newTransaction = new Transaction({
-        id : req.body.id,
-        concept : req.body.concept,
+        type : req.body.type,
         category : req.body.category,
         amount :req.body.amount,
         date : req.body.date
-    })
+        })
 
     newTransaction
         .save()
