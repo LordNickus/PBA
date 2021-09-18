@@ -9,17 +9,14 @@ mongoose.connect( 'mongodb://localhost:27017/PBA', {
     useUnifiedTopology: true
 })
 
-const Category = require('./Public/category')
-const Transaction = require('./schemas/transaction')
-const User = require('./schemas/user')
-
+const Category = require('./schemas/category')
 
 app.use(cors())
 app.use(express.json())
 
 
 /**Categories */
-app.get('/category', function (req, res){
+app.get('/categories', function (req, res){
     Category
         .find()
         .then(data => {
@@ -30,13 +27,8 @@ app.get('/category', function (req, res){
     
 })
 
-app.patch('/category/:id', function(req, res) {
-    res.status(201).end()
 
-
-})
-
-app.post('/category', function (req, res) {
+app.post('/categories', function (req, res) {
     let newCategory = new Category({
         title : req.body.title,
         type : req.body.type
@@ -44,12 +36,18 @@ app.post('/category', function (req, res) {
 
     newCategory
         .save()
-        .then(data =>{
+        .then(data => {
             res.status(201).send({id : data._id})
     })
-        .catch(err =>{
+        .catch(err => {
             res.status(422).send({message : err.message})
     })
+})
+
+app.patch('/categories/:id', function(req, res) {
+    res.status(201).end()
+
+
 })
 
 

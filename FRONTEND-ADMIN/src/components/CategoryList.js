@@ -7,9 +7,8 @@ function CategoryList(){
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:4005/public/category')
+        fetch('http://localhost:4005/categories')
             .then(res => res.json())
-            .then(json => console.log(json))
             .then(json => setCategories(json))
     }, [])
 
@@ -24,28 +23,26 @@ function CategoryList(){
                     </div>
 
                     <Table striped bordered hover className="shadow">
-                    <thead>
-                        <tr>
-                            {/* <th>ID</th> */}
-                            <th>Categoria</th>
-                            <th>Tipo</th>
-                            {/* <th>Function</th> */}
-                        </tr>
-                    </thead>
+                        <thead>
+                            <tr>
+                                {/* <th>ID</th> */}
+                                <th>Categoria</th>
+                                <th>Tipo</th>
+                                {/* <th>Function</th> */}
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        {
-                            categories.map(function (category) {
-                                return (
-                                 <tr>
-                                    <td>{category.tittle}</td>
-                                    <td>{category.type}</td>
-                                 </tr>
-                                )
-                            })
-                        
-                        }
-                    </tbody>
+                        <tbody>
+                            { categories.map(function (category) {
+                                    return (
+                                        <tr key={category._id}>
+                                            <td>{ category.title }</td>
+                                            <td>{ category.type }</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
                  </Table>
 
                 <div bg="primary">

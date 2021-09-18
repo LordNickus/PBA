@@ -1,16 +1,41 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import NavigationBar from "./Navbar"
 import {Container, Row, Col, Table, Button, Form, FloatingLabel} from 'react-bootstrap'
 
 
 function CategoryCreateForm(){
     const [category, setCategory ] = useState({})
+    const [categories, setCategories] = useState([])
+
+    useEffect(() => {
+        fetch('http://localhost:4005/categories')
+            .then(res => res.json())
+            .then(json => setCategories(json))
+    }, [])
 
     function handleInput (e){
-        console.log( e.target.tittle, e.target.type)
+        setCategory({
+            ...category,
+            [e.target.name] : e.target.value,
+        })
     }
 
-    return (<>
+    function handleSubmit (e){
+        e.preventDefault()
+        fetch('http://localhost:4005/categories', {
+            method : "POST",
+            headers : {
+                "content-type" : "application/json"
+            },
+            body : JSON.stringify(category)
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+    }
+    
+    
+    return (
+    <>
         <NavigationBar/>
     
         <Container>
@@ -20,25 +45,32 @@ function CategoryCreateForm(){
                     <h1>Alta de categorias</h1>
                 </div>
                 
-                <Form>
-                <FloatingLabel
-                    controlId="floatingInput"
-                    label="Tittle"
-                    className="mb-3"
-                >
-                    <Form.Control type="Tittle"  onInput={handleInput}/>
-                </FloatingLabel>
+                <Form onSubmit={handleSubmit}> 
+                    <FloatingLabel
+                        label="Type"
+                        controlId="floatingSelect"
+                        // className="mb-3"
+                    >
+                        <Form.Select name="type" onInput={handleInput}>
+                            <option value=""></option>
+                            <option value="Income">Income</option>
+                            <option value="Expense">Expense</option>
+                            
+                        </Form.Select> 
+                    </FloatingLabel>                                 
+                   
+                    <FloatingLabel
+                        label="Title"
+                        controlId="floatingInput"
+                        className="mb-3"
+                    >
+                        <Form.Control name="title" onInput={handleInput}/>
+                    </FloatingLabel>
 
-                <FloatingLabel
-                    controlId="floatingInput"
-                    label="Type"
-                    className="mb-3"
-                >
-                    <Form.Control type="Type"  onInput={handleInput}/>
-                </FloatingLabel>
+                
 
                 <div className="d-grid gap-2">
-                    <Button variant="primary" size="lg">
+                    <Button onClick={handleSubmit} variant="primary" size="lg">
                         Guardar
                     </Button>
                 </div>
