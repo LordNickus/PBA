@@ -1,17 +1,33 @@
 import NavigationBar from "./Navbar"
 import {Container, Row, Col, Table, Button, Form, FloatingLabel} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import { useState, useEffect } from "react"
 
-function Transaction(){
-    const [transaction, setTransaction ] = useState({})
-    
+function TransactionEditForm(){
+    const params = useParams()
+    const [transaction, setTransaction ] = useState({
+        type: "",
+        amount: "",
+        category: "",
+        date:""
+    })
+    const [transactions, setTransactions] = useState([])
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
         fetch('http://localhost:4005/categories')
             .then(res => res.json())
             .then(json => setCategories(json))
+    }, [])
+
+    useEffect(() => {
+        fetch(`http://localhost:4005/transactions/${params.id}`)
+            .then(res => res.json())
+            .then(json => setTransaction(json))
+        
+        fetch(`http://localhost:4005/transactions`)
+            .then(res => res.json())
+            .then(json => setTransactions(json))    
     }, [])
 
     function handleInput (e){
@@ -22,9 +38,9 @@ function Transaction(){
     }
 
     function handleSubmit (e){
-        // e.preventDefault()
-        fetch('http://localhost:4005/transactions', {
-            method : "POST",
+        e.preventDefault()
+        fetch(`http://localhost:4005/transactions/${params.id}`, {
+            method : "PATCH",
             headers : {
                 "content-type" : "application/json"
             },
@@ -41,22 +57,17 @@ function Transaction(){
             <Row>
             <Col className="my-3">
                     <div className="my-3">
-                    <h1> Transactions </h1>
+                    <h1> Transactions Edit</h1>
                     </div>
 
                 <Form onSubmit={handleSubmit}> 
-                    <FloatingLabel
+                <FloatingLabel
                         label="Type"
-                        controlId="floatingSelect"
+                        controlId="floatingInput"
                         className="mb-3"
                     >
-                        <Form.Select name="type" onInput={handleInput}>
-                            <option value=""></option>
-                            <option value="Income">Income</option>
-                            <option value="Expense">Expense</option>
-                            
-                        </Form.Select> 
-                    </FloatingLabel>                                 
+                        <Form.Control name="type" value={transaction.type} onInput={handleInput} readOnly/>
+                    </FloatingLabel>                             
                    
                     <FloatingLabel
                         label="Category"
@@ -64,7 +75,7 @@ function Transaction(){
                         className="mb-3"
                     >
                         <Form.Select name="category" onInput={handleInput}>
-                            <option value=""></option>
+                            <option defaultValue={transaction.category}>{transaction.category}</option>
                             {categories.map(function(category){
                                 return <option key={category._id} value={category.title}>{category.title}</option>
                             })}                            
@@ -77,7 +88,7 @@ function Transaction(){
                         controlId="floatingInput"
                         className="mb-3"
                     >
-                        <Form.Control name="amount" onInput={handleInput}/>
+                        <Form.Control name="amount" value={transaction.amount} onInput={handleInput}/>
                     </FloatingLabel>
 
                     <FloatingLabel
@@ -85,7 +96,7 @@ function Transaction(){
                         controlId="floatingInput"
                         className="mb-3"
                     >
-                        <Form.Control name="date" onInput={handleInput}/>
+                        <Form.Control onInput={handleInput} value={transaction.date} name="date"/>
                     </FloatingLabel>
 
                 
@@ -98,12 +109,7 @@ function Transaction(){
                 </Form>
                 
                                   
-                <div className="d-grid gap-2 my-3">
-                    <Button variant="dark" size="lg">
-                            <Link className="nav-link" to="/category/:id/edit">Editar</Link>
-                    </Button>
-                </div>
-
+                
                 
                 </Col>
             </Row>
@@ -112,4 +118,4 @@ function Transaction(){
     )
 }
 
-export default Transaction
+export default TransactionEditForm

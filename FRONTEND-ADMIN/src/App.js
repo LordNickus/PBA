@@ -7,6 +7,7 @@ import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import Transaction from './components/Transaction';
 import UsersList from './components/UsersList';
+import TransactionEditForm from './components/TransactionEditForm'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <CategoryCreateForm/>
         </Route>
 
-        <Route path="/category/:id/edit">
+        <Route path="/categories/:id/edit">
           <CategoryEditForm/>
         </Route>
 
@@ -26,6 +27,10 @@ function App() {
 
         <Route path="/users">
           <UsersList/>
+        </Route>
+
+        <Route path="/transaction/:id/edit">
+          <TransactionEditForm/>
         </Route>
 
         <Route path="/transaction">

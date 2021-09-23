@@ -28,6 +28,21 @@ app.get('/categories', function (req, res){
     
 })
 
+app.get('/categories/:id', function (req, res){
+    Category
+        .findById(req.params.id)
+        .then(data => {
+            if (data) {
+                res.send (data)
+            } else {
+                res.status(404).end()
+            }
+        }).catch(err => {
+            res.status(500).send({error : err.message})
+    })
+    
+})
+
 
 app.post('/categories', function (req, res) {
     let newCategory = new Category({
@@ -46,9 +61,17 @@ app.post('/categories', function (req, res) {
 })
 
 app.patch('/categories/:id', function(req, res) {
-    res.status(201).end()
-
-
+    Category
+        .findByIdAndUpdate(req.params.id, {
+            title : req.body.title,
+            type : req.body.type
+        })
+        .then(data => {
+            res.status(201).send({message : 'updated'})
+        }).catch(err => {
+            res.status(422).send({error : err.message})
+    })
+    
 })
 
 
@@ -64,8 +87,34 @@ app.get('/transactions', function (req, res){
 
 })
 
+app.get('/transactions/:id', function (req, res){
+    Transaction
+    .findById(req.params.id)
+        .then(data => {
+            if (data) {
+                res.send (data)
+            } else {
+                res.status(404).end()
+            }
+        }).catch(err => {
+            res.status(500).send({error : err.message})
+    })
+    
+})
+
 app.patch('/transactions/:id', function(req, res) {
-    res.status(201).end()
+    Transaction
+    .findByIdAndUpdate(req.params.id, {
+        category : req.body.category,
+        amount :req.body.amount,
+        date : req.body.date
+    })
+    .then(data => {
+        res.status(201).send({message : 'updated'})
+    }).catch(err => {
+        res.status(422).send({error : err.message})
+})
+
 })
 
 app.post('/transactions', function (req, res) {
