@@ -1,9 +1,18 @@
-import {Container, Row, Col, Table} from 'react-bootstrap'
+import {useState, useEffect} from 'react'
+import NavigationBar from "./Navbar"
+import {Container, Row, Col, Table, Button, Dropdown, Pagination} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
-import NavigationBar from './Navbar'
 
 
 function UsersList(){
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        fetch('http://localhost:4005/users')
+            .then(res => res.json())
+            .then(json => setUsers(json))
+    }, [])
     return <>
     <NavigationBar/>
 
@@ -11,7 +20,7 @@ function UsersList(){
         <Row>
             <Col>
             <div className="my-3">
-            <h1> Clientes </h1>
+            <h1> Users </h1>
             </div>
                 
                 <Table striped bordered hover className="shadow">
@@ -20,29 +29,27 @@ function UsersList(){
                             <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>Username</th>
-                            <th>Function</th>
+                            <th>Email</th>
+                            <th>Uid</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td colSpan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                        {users.map(function (user){
+                            return (
+                                <tr key={user._id}>
+                                    <td>{user._id}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.lastName}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.uid}</td>
+                                </tr>
+
+                            )
+
+                        })}
+                        
+                        
+                        
                     </tbody>
                  </Table>
                 </Col>

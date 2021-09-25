@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { Suspense} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import firebaseConfig from './firebase-config';
+import { FirebaseAppProvider } from 'reactfire'
+
 
 ReactDOM.render(
-  <React.StrictMode>
+<FirebaseAppProvider firebaseConfig={firebaseConfig}>
+  <Suspense fallback={'Conecting...'}>
     <App />
-  </React.StrictMode>,
+  </Suspense>
+</FirebaseAppProvider>,
   document.getElementById('root')
 );
 

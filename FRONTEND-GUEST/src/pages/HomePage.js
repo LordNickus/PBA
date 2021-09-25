@@ -1,11 +1,10 @@
 import {useState, useEffect} from 'react'
-import NavigationBar from "./Navbar"
-import {Container, Row, Col, Table, Button} from 'react-bootstrap'
+import NavigationBar from "../components/NavigationBar"
 import {Link} from 'react-router-dom'
 
+import {Row , Col , Table, Button, Container} from 'react-bootstrap'
 
-
-function HomePage(){
+export default function HomePage(){
 
     const [transactions, setTransactions ] = useState([])
 
@@ -25,6 +24,7 @@ function HomePage(){
     return (<>
         <NavigationBar/>
     
+        
         <Container>
             <Row>
                 <Col className="my-2">
@@ -53,7 +53,7 @@ function HomePage(){
             <Row>
                 <Col className="my-2">
                     <div className="my-3">
-                    <h1> Ultimos Movimientos </h1>
+                    <h1> Last Transactions </h1>
                     </div>
 
                     <Table striped bordered hover className="shadow">
@@ -76,8 +76,8 @@ function HomePage(){
                                             <td>${ transaction.amount }</td>
                                             <td>{ transaction.date }</td>
                                             <td>
-                                                <Button variant="dark" size="sm">
-                                                    <Link className="nav-link" to={`/transaction/${transaction._id}/edit`}>Editar</Link>
+                                                <Button bg="primary" variant="dark" size="sm">
+                                                    <Link className="nav-link" to={`/transaction/${transaction._id}/edit`}>Edit</Link>
                                                 </Button>
                                             </td>
                                         </tr>
@@ -95,4 +95,3 @@ function HomePage(){
         )
     }      
 
-export default HomePage

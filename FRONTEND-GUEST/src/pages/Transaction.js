@@ -1,4 +1,4 @@
-import NavigationBar from "./Navbar"
+import NavigationBar from "../components/NavigationBar"
 import {Container, Row, Col, Table, Button, Form, FloatingLabel} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useState, useEffect } from "react"
@@ -23,7 +23,7 @@ function Transaction(){
     }
 
     function handleSubmit (e){
-        // e.preventDefault()
+        e.preventDefault()
         fetch('http://localhost:4005/transactions', {
             method : "POST",
             headers : {
@@ -93,13 +93,11 @@ function Transaction(){
 
                 <div className="d-grid gap-2">
                     <Button onClick={handleSubmit} variant="primary" size="lg">
-                        Guardar
+                        <Link href='/home'>
+                        Save</Link>
                     </Button>
                 </div>
-                </Form>
-                
-                                  
-                               
+                </Form>              
                 </Col>
             </Row>
         </Container>

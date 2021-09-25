@@ -1,8 +1,21 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-
+const firebaseApp = require('firebase/app')
 const mongoose = require('mongoose')
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCXSsApiklzVG3glgbKJklogi4gCQKzZTU",
+  authDomain: "hometeam-d5e12.firebaseapp.com",
+  projectId: "hometeam-d5e12",
+  storageBucket: "hometeam-d5e12.appspot.com",
+  messagingSenderId: "160917621414",
+  appId: "1:160917621414:web:9f5ca16b7981a4430ec267"
+};
+
+firebaseApp.initializeApp(firebaseConfig);
+
 
 mongoose.connect( 'mongodb://localhost:27017/PBA', {
     useNewUrlParser: true,
@@ -11,6 +24,7 @@ mongoose.connect( 'mongodb://localhost:27017/PBA', {
 
 const Category = require('./schemas/category')
 const Transaction = require('./schemas/transaction')
+const User = require('./schemas/user')
 
 app.use(cors())
 app.use(express.json())
@@ -153,7 +167,44 @@ app.patch('/users/:id', function(req, res) {
 })
 
 app.post('/users', function (req, res) {
-    res.status(201).send({id : 1234556})
+    // const auth = auth().createUserWithEmailAndPassword(email, password)
+    //     .then((userCredential) => {
+    //     const user = userCredential.user;
+    
+     let newUser = new User({
+        name : req.body.name,
+        lastName : req.body.lastName,
+        email : req.body.email,
+        uid : req.body.uid
+        })
+    newUser
+        .save()
+        .then( data =>{
+        res.status(201).send({id : data._id})
 })
+.catch((error) => { 
+    res.json(error)
+});    
+})
+// })
+app.post('/users/login', function (req, res){
+    // const auth = getAuth();
+    //     signInWithEmailAndPassword(auth, email, password)
+    //         .then((userCredential) => {
+    //            const user = userCredential.user;
+            
+    //     })
+    //     .catch((error) => {
+    //         const errorCode = error.code;
+    //         const errorMessage = error.message;
+    //         res.json(error)
+        });
+
+
+
+    
+
+
+
 
 app.listen(4005)
