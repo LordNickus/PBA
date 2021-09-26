@@ -188,6 +188,7 @@ app.post('/users', function (req, res) {
 })
 // })
 app.post('/users/login', function (req, res){
+    res.status(201).end()
     // const auth = getAuth();
     //     signInWithEmailAndPassword(auth, email, password)
     //         .then((userCredential) => {
@@ -199,12 +200,5 @@ app.post('/users/login', function (req, res){
     //         const errorMessage = error.message;
     //         res.json(error)
         });
-
-
-
-    
-
-
-
 
 app.listen(4005)
