@@ -77,7 +77,7 @@ function HomePage(){
                                             <td>{ transaction.date }</td>
                                             <td>
                                                 <Button variant="dark" size="sm">
-                                                    <Link className="nav-link" to={`/transaction/${transaction._id}/edit`}>Editar</Link>
+                                                    <Link className="nav-link" to={`/transaction/${transaction._id}/edit`}>Edit</Link>
                                                 </Button>
                                             </td>
                                         </tr>
