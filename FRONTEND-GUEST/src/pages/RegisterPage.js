@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import {Link} from 'react-router-dom'
+import Link from '@material-ui/core/Link'
 
 function Copyright(props) {
   return (
@@ -46,7 +46,8 @@ export default function SignUp() {
             headers : {
                 "content-type" : "application/json"
             },
-            body : JSON.stringify(user)
+            body : JSON.stringify(user),
+            success: window.location = '/home',
         })
         .then(res => res.json())
         .then(data => console.log(data))
@@ -123,12 +124,15 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
+            
             <Button
               type="submit"
+              onClick={handleSubmit}
               fullWidth
-              variant="outlined"
+              variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            ><Link to='/home' className="nav-link" >Sign Up</Link>
+              >
+                Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

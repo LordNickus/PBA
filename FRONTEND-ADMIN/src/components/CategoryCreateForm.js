@@ -27,7 +27,8 @@ function CategoryCreateForm(){
             headers : {
                 "content-type" : "application/json"
             },
-            body : JSON.stringify(category)
+            body : JSON.stringify(category),
+            success: window.location = '/category',
         })
         .then(res => res.json())
         .then(data => console.log(data))
@@ -42,14 +43,14 @@ function CategoryCreateForm(){
             <Row>
                 <Col>
                 <div className="my-3">
-                    <h1>Alta de categorias</h1>
+                    <h1>Category Create</h1>
                 </div>
                 
                 <Form onSubmit={handleSubmit}> 
                     <FloatingLabel
                         label="Type"
                         controlId="floatingSelect"
-                        // className="mb-3"
+                        className="mb-3"
                     >
                         <Form.Select name="type" onInput={handleInput}>
                             <option value=""></option>
@@ -70,8 +71,8 @@ function CategoryCreateForm(){
                 
 
                 <div className="d-grid gap-2">
-                    <Button onClick={handleSubmit} variant="primary" size="lg">
-                        Guardar
+                    <Button onClick={handleSubmit} variant="dark" size="lg">
+                        Save
                     </Button>
                 </div>
                 </Form>

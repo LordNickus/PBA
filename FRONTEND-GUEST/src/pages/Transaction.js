@@ -1,6 +1,5 @@
 import NavigationBar from "../components/NavigationBar"
-import {Container, Row, Col, Table, Button, Form, FloatingLabel} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Container, Row, Col, Button, Form, FloatingLabel} from 'react-bootstrap'
 import { useState, useEffect } from "react"
 
 
@@ -29,7 +28,8 @@ function Transaction(){
             headers : {
                 "content-type" : "application/json"
             },
-            body : JSON.stringify(transaction)
+            body : JSON.stringify(transaction),
+            success: window.location = '/home',
         })
         .then(res => res.json())
         .then(data => console.log(data))
@@ -93,8 +93,7 @@ function Transaction(){
 
                 <div className="d-grid gap-2">
                     <Button onClick={handleSubmit} variant="primary" size="lg">
-                        <Link href='/home'>
-                        Save</Link>
+                        Save
                     </Button>
                 </div>
                 </Form>              

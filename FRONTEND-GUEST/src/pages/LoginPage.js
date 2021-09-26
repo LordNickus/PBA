@@ -88,8 +88,8 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            ><Link href="/home">
-              Sign In</Link>
+            >
+              Sign In
             </Button>
             <Grid container>
               <Grid item xs>

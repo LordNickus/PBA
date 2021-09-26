@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import NavigationBar from "./NavigationBar"
-import {Container, Row, Col, Table, Button, Dropdown, Pagination} from 'react-bootstrap'
+import {Container, Row, Col, Table, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
 function CategoryList(){
@@ -50,14 +50,13 @@ function CategoryList(){
                         </tbody>
                  </Table>
 
-                <div bg="primary">
-                    <div className="d-grid gap-2 my-3">
-                        <Button variant="outlined" size="lg" >
-                            <Link className="nav-link" to="/category/create">Create</Link>
+                <div className="my-5">
+                    <div className="d-grid gap-2">
+                        <Button variant="primary" size="lg" href="/category/create" >
+                                Create
                         </Button>
-                    </div>
-                    
-                    
+
+                    </div>                   
 
                 </div>
                 </Col>

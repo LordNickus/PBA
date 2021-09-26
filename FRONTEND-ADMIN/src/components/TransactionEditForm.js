@@ -44,7 +44,8 @@ function TransactionEditForm(){
             headers : {
                 "content-type" : "application/json"
             },
-            body : JSON.stringify(transaction)
+            body : JSON.stringify(transaction),
+            success: window.location = '/home',
         })
         .then(res => res.json())
         .then(data => console.log(data))
@@ -102,8 +103,8 @@ function TransactionEditForm(){
                 
 
                 <div className="d-grid gap-2">
-                    <Button onClick={handleSubmit} variant="primary" size="lg">
-                        Guardar
+                    <Button onClick={handleSubmit} variant="dark" size="lg">
+                        Save
                     </Button>
                 </div>
                 </Form>

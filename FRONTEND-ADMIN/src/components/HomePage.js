@@ -53,7 +53,7 @@ function HomePage(){
             <Row>
                 <Col className="my-2">
                     <div className="my-3">
-                    <h1> Ultimos Movimientos </h1>
+                    <h1> Last Transactions </h1>
                     </div>
 
                     <Table striped bordered hover className="shadow">
@@ -88,7 +88,11 @@ function HomePage(){
                  </Table>
                 </Col>
             </Row>
-
+            <Row>
+                <div className="my-3">
+                            <h5>App para challenge  </h5>
+                    </div>
+            </Row>       
             
         </Container>
         </>

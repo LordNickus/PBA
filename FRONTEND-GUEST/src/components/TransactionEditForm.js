@@ -1,6 +1,6 @@
 import NavigationBar from "./NavigationBar"
-import {Container, Row, Col, Table, Button, Form, FloatingLabel} from 'react-bootstrap'
-import {Link, useParams} from 'react-router-dom'
+import {Container, Row, Col, Button, Form, FloatingLabel} from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
 import { useState, useEffect } from "react"
 
 function TransactionEditForm(){
@@ -44,7 +44,8 @@ function TransactionEditForm(){
             headers : {
                 "content-type" : "application/json"
             },
-            body : JSON.stringify(transaction)
+            body : JSON.stringify(transaction),
+            success: window.location = '/home',
         })
         .then(res => res.json())
         .then(data => console.log(data))
@@ -102,9 +103,8 @@ function TransactionEditForm(){
                 
 
                 <div className="d-grid gap-2">
-                    <Button onClick={handleSubmit} variant="outlined" size="lg">
-                        <Link to='/home' className="nav-link">
-                        Save</Link>
+                    <Button onClick={handleSubmit} variant="primary" size="lg">
+                        Save
                     </Button>
                 </div>
                 </Form>

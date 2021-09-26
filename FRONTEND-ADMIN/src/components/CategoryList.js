@@ -19,7 +19,7 @@ function CategoryList(){
             <Row>
                 <Col className="my-3">
                     <div className="my-3">
-                    <h1> Categorias </h1>
+                    <h1> Categories </h1>
                     </div>
 
                     <Table striped bordered hover className="shadow">
@@ -39,7 +39,7 @@ function CategoryList(){
                                             <td>{ category.type }</td>
                                             <td>
                                             <Button variant="dark" size="sm">
-                                                 <Link className="nav-link" to={`/categories/${category._id}/edit`}>Editar</Link>
+                                                 <Link className="nav-link" to={`/categories/${category._id}/edit`}>Edit</Link>
                                             </Button>
                                             </td>
                                         </tr>
@@ -49,10 +49,10 @@ function CategoryList(){
                         </tbody>
                  </Table>
 
-                <div bg="primary">
-                    <div className="d-grid gap-2 my-3">
-                        <Button variant="dark" size="lg" >
-                            <Link className="nav-link" to="/category/create">Crear</Link>
+                <div className="my-5">
+                    <div className="d-grid gap-2 my-6">
+                        <Button variant="dark" size="lg" href="/category/create">
+                            Create
                         </Button>
                     </div>
                     

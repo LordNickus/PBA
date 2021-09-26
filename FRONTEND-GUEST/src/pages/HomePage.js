@@ -51,7 +51,7 @@ export default function HomePage(){
             </Row>        
             
             <Row>
-                <Col className="my-2">
+                <Col className="my-6">
                     <div className="my-3">
                     <h1> Last Transactions </h1>
                     </div>
@@ -88,7 +88,11 @@ export default function HomePage(){
                  </Table>
                 </Col>
             </Row>
-
+            <Row>
+                <div className="my-3">
+                            <h5>App para challenge  </h5>
+                    </div>
+            </Row>                
             
         </Container>
         </>

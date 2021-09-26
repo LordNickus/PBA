@@ -38,7 +38,8 @@ function CategoryEditForm(){
             headers : {
                 "content-type" : "application/json"
             },
-            body : JSON.stringify(category)
+            body : JSON.stringify(category),
+            success: window.location = '/category',
         })
         .then(res => res.json())
         .then(data => console.log(data))
@@ -51,7 +52,7 @@ function CategoryEditForm(){
             <Row>
                 <Col>
                 <div className="my-3">
-                    <h1>Edicion de categorias</h1>
+                    <h1>Category Edit</h1>
                 </div>
                 
                 <Form onSubmit={handleSubmit}> 
@@ -79,8 +80,8 @@ function CategoryEditForm(){
                 
 
                 <div className="d-grid gap-2">
-                    <Button onClick={handleSubmit} variant="primary" size="lg">
-                        Guardar
+                    <Button onClick={handleSubmit} variant="dark" size="lg">
+                       Save
                     </Button>
                 </div>
                 </Form>
